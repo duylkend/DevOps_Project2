@@ -1,5 +1,5 @@
 # CD12352 - Infrastructure as Code Project Solution
-# [YOUR NAME HERE]
+# DuyLK16
 
 ## Spin up instructions
 Run this command to create the network
