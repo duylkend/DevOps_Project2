@@ -1,0 +1,18 @@
+[
+	{
+	  "ParameterKey": "EnvironmentName",
+	  "ParameterValue": "UdacityProject"
+	},
+	{
+	  "ParameterKey": "DesiredCapacity",
+	  "ParameterValue": "3"
+	},
+	{
+	  "ParameterKey": "S3BucketName",
+	  "ParameterValue": "427645120130-udacity-project-2"
+	},
+	{
+	  "ParameterKey": "KeyName",
+	  "ParameterValue": "ssh_udacity"
+	}
+  ]
