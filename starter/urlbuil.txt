@@ -1,5 +1,4 @@
 WebAppLB
-http://udagra-webap-qmk6aqyhchxm-412267867.us-east-1.elb.amazonaws.com/
-
+http://udagra-WebAp-JGB9JuXEsOYX-2096110940.us-east-1.elb.amazonaws.com
 MyCloudFrontDistribution
-https://d38syeedwmsmbr.cloudfront.net
+https://d2jo5j5c2k9mbi.cloudfront.net

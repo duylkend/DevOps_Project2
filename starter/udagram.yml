@@ -259,3 +259,9 @@ Resources:
             QueryString: true
           ViewerProtocolPolicy: allow-all
         Enabled: true
+Outputs:
+  LoadBalancerURL:
+    Description: Public URL of the LoadBalancer
+    Value: !Join ["", ["http://", !GetAtt WebAppLB.DNSName]]
+    Export:
+      Name: !Sub "LoadBalancerURL"
