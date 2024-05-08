@@ -25,7 +25,7 @@ Resources:
       GroupDescription: Allow http access to our load balance
       VpcId:
         Fn::ImportValue:
-          !Sub "${EnvironmentName}-vpc-id"
+          !Sub "${EnvironmentName}-VPCID"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
@@ -37,16 +37,16 @@ Resources:
       GroupDescription: Allow http access to our hosts from our lb Security group
       VpcId:
         Fn::ImportValue:
-          !Sub "${EnvironmentName}-vpc-id"
+          !Sub "${EnvironmentName}-VPCID"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
           SourceSecurityGroupId: !Ref LBSecGroup
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          SourceSecurityGroupId: !Ref BastionSecurityGroup
+        # - IpProtocol: tcp
+        #   FromPort: 22
+        #   ToPort: 22
+        #   SourceSecurityGroupId: !Ref BastionSecurityGroup
       SecurityGroupEgress:
         - IpProtocol: tcp
           FromPort: 0
@@ -58,7 +58,7 @@ Resources:
     Properties:
       LaunchTemplateName: !Sub "${EnvironmentName}-web-servers"
       LaunchTemplateData:
-        KeyName: !Ref KeyName
+        # KeyName: !Ref KeyName
         UserData:
           Fn::Base64: |
             #!/bin/bash
@@ -70,7 +70,7 @@ Resources:
             <!DOCTYPE html> 
             <html> 
             <head> 
-            <title>Project 2 - DevOps</title> 
+            <title>lt works! Udagram, Udacity </title> 
             </head> 
             <body>
             <h1>lt works! Udagram, Udacity</h1> 
@@ -81,7 +81,7 @@ Resources:
 
             # Reload Nginx to apply changes
             sudo systemctl restart nginx
-        ImageId: ami-07caf09b362be10b8
+        ImageId: ami-04b70fa74e45c3917
         SecurityGroupIds:
           - !Ref WebServerSecGroup
         InstanceType: t2.micro
@@ -156,7 +156,7 @@ Resources:
     Properties:
       VPCZoneIdentifier:
         - Fn::ImportValue:
-            !Sub "${EnvironmentName}-private-subnets"
+            !Sub "${EnvironmentName}-PRIV-NETS"
       LaunchTemplate:
         LaunchTemplateId: !Ref WebAppLaunchTemplate
         Version: !GetAtt WebAppLaunchTemplate.LatestVersionNumber
@@ -179,13 +179,13 @@ Resources:
       UnhealthyThresholdCount: 5
       VpcId:
         Fn::ImportValue:
-          Fn::Sub: "${EnvironmentName}-vpc-id"
+          Fn::Sub: "${EnvironmentName}-VPCID"
   WebAppLB:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
       Subnets:
-        - Fn::ImportValue: !Sub "${EnvironmentName}-public-subnet1"
-        - Fn::ImportValue: !Sub "${EnvironmentName}-public-subnet2"
+        - Fn::ImportValue: !Sub "${EnvironmentName}-PUB1-SN"
+        - Fn::ImportValue: !Sub "${EnvironmentName}-PUB2-SN"
       SecurityGroups:
         - Ref: LBSecGroup
   Listener:
@@ -234,7 +234,7 @@ Resources:
   #     GroupDescription: Allow public SSH access to the bastion host
   #     VpcId:
   #       Fn::ImportValue:
-  #         !Sub "${EnvironmentName}-vpc-id"
+  #         !Sub "${EnvironmentName}-VPCID"
   #     SecurityGroupIngress:
         # Allow SSH access to the bastion host
         # Ideally, set the ip address of your local computer. In this case, though,
